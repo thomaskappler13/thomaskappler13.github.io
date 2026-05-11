@@ -1,351 +1,167 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projets E5 - Portfolio BTS SIO</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets E5 - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .btn-download {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .btn-download:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a class="logo" href="index.html">Thomas <span>Kappler</span></a>
-      <div class="nav-toggle" id="navToggle">
-        <span></span><span></span><span></span>
-      </div>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html"  class="nav-link">Accueil</a></li>
-        <li><a href="about.html"  class="nav-link">À propos</a></li>
-        <li><a href="e5.html"     class="nav-link active">E5 — Projets</a></li>
-        <li><a href="e6.html"     class="nav-link">E6 — Projets</a></li>
-        <li><a href="veille.html" class="nav-link">Veille</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="page active">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Portfolio BTS SIO</div>
+            <div class="nav-toggle" onclick="toggleMobileNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="about.html" class="nav-link">À propos</a></li>
+                <li><a href="e5.html" class="nav-link active">E5 - Projets</a></li>
+                <li><a href="e6.html" class="nav-link">E6 - Projets</a></li>
+                <li><a href="veille.html" class="nav-link">Veille</a></li>
+            </ul>
+        </div>
+    </nav>
+	<br>
+	<br>
     <div class="container">
-
-      <!-- EN-TÊTE -->
-      <div class="section-header" style="text-align:left; margin-bottom:2.5rem;">
-        <h2>Projets E5</h2>
-        <p>Support et mise à disposition de services informatiques — infrastructures, virtualisation, conteneurs et bases de données.</p>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 1 — pfSense NAT/DMZ/VLAN
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Installation pfSense — NAT · DMZ · VLAN</h3>
-            <p>Déploiement d'un pare-feu avec segmentation réseau complète sous Proxmox</p>
-          </div>
-          <span class="project-number">E5 — 01</span>
+        <div class="section-header">
+            <h2>Projets E5</h2>
+            <p>Support et mise à disposition de services informatiques</p>
         </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Mise en place d'une infrastructure réseau segmentée sous Proxmox avec pfSense comme pare-feu central. L'architecture repose sur trois VLANs distincts (LAN, DMZ, Serveurs) reliés via un bridge VLAN-aware, avec exposition sécurisée d'un serveur web Apache en DMZ.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Création d'un bridge vmbr100 VLAN-aware sur Proxmox et ajout de trois interfaces virtuelles (VLAN 101 LAN · VLAN 102 DMZ · VLAN 103 SERV)</li>
-            <li>Installation et configuration de pfSense 2.7.2 : attribution des interfaces WAN (em0), LAN (em1), OPT1/DMZ (em2), OPT2/SERV (em3)</li>
-            <li>Configuration IP statique de chaque interface : LAN 10.101.0.1/24, DMZ 10.102.0.1/24, SERV 10.103.0.1/24</li>
-            <li>Activation du serveur DHCP sur le VLAN LAN (plage 10.101.0.50–100)</li>
-            <li>Règles de filtrage pare-feu : LAN → DMZ HTTP autorisé, DMZ → LAN bloqué, DMZ → Internet autorisé</li>
-            <li>Redirection NAT Port Forward : WAN:8080 → 10.102.0.10:80 pour exposer le serveur Apache depuis l'extérieur</li>
-            <li>Installation et validation d'Apache2 sur la VM WEB-DMZ (Ubuntu Server 24.04, IP 10.102.0.10)</li>
-            <li>Tests de connectivité : ping 8.8.8.8 depuis PC-LAN, accès http://10.102.0.10 depuis LAN, accès http://IP_WAN:8080 depuis le PC physique</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">pfSense 2.7.2</span>
-            <span class="tech-tag">Proxmox VE</span>
-            <span class="tech-tag">VLAN</span>
-            <span class="tech-tag">NAT / Port Forward</span>
-            <span class="tech-tag">Apache2</span>
-            <span class="tech-tag">Ubuntu Server 24.04</span>
-            <span class="tech-tag">Pare-feu</span>
-            <span class="tech-tag">DMZ</span>
-          </div>
-
-          <a class="doc-link" href="Installation_pfSense_-_NAT-DMZ-VLAN.pdf">
-            📄 Ouvrir la procédure
-          </a>
+        
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Administration Windows Server OS</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Mise en place d'une infrastructure réseau centralisée sous Windows Server.</p>
+                <br>
+                <p><strong>Procédures techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Configuration d'IP statiques, routage, Active Directory, DNS et DHCP.</li>
+                    <li>Gestion des utilisateurs et déploiement de GPO (Utilisateurs et Ordinateurs).</li>
+                    <li>Déploiement de Windows via le réseau avec WDS.</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Windows Server</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">WDS</span>
+                </div>
+                <a href="TP Windows Server OS admin.pdf" target="_blank" class="btn-doc">
+                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
+            </div>
         </div>
-      </div>
 
-      <!-- ══════════════════════════════════════
-           PROJET 2 — PCA / PRA Veeam
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Mise en place d'un plan de sauvegarde PCA/PRA</h3>
-            <p>Infrastructure virtuelle Proxmox avec Veeam Backup & Replication</p>
-          </div>
-          <span class="project-number">E5 — 02</span>
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Déploiement Docker : Debian 12 & Apache2</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Création et déploiement d'une image personnalisée pour un service web.</p>
+                <br>
+                <p><strong>Procédures techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Rédaction du Dockerfile, Build de l'image et test du conteneur.</li>
+                    <li>Publication de l'image sur Docker Hub.</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Debian 12</span>
+                    <span class="tech-tag">Docker Hub</span>
+                </div>
+                <a href="Déploiement d'un service avec Docker  Debian12-Apache2.pdf" target="_blank" class="btn-doc">
+                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
+            </div>
         </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Déploiement d'une infrastructure virtuelle complète sous Proxmox pour mettre en œuvre un Plan de Continuité d'Activité (PCA) et un Plan de Reprise d'Activité (PRA). L'objectif est de configurer des sauvegardes automatisées de VMs et de tester la restauration complète après incident.</p>
 
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Création de 4 VMs sur Proxmox : SRV-AD (Windows Server 2022), SRV-VEEAM (Windows Server 2022), SRV-WEB (Linux Ubuntu), Client-test (Windows 10)</li>
-            <li>Plan d'adressage IP réseau 172.16.13.0/24 : SRV-AD .10, SRV-VEEAM .20, SRV-WEB .30, Client en DHCP</li>
-            <li>Configuration de SRV-AD : rôles AD DS, DNS et DHCP — promotion en contrôleur de domaine (forêt tp.local)</li>
-            <li>Création de l'étendue DHCP : plage 172.16.13.100–150, passerelle .1, DNS .10</li>
-            <li>Intégration du Client-test au domaine tp.local et vérification (ping srv-ad, ping tp.local)</li>
-            <li>Installation d'Apache2 sur SRV-WEB, personnalisation de la page index.html, vérification depuis le client</li>
-            <li>Adaptation en environnement personnel : réseau 192.168.18.0/24, installation et validation complète d'Apache2</li>
-            <li>Procédure Veeam Backup & Replication 13 : installation, configuration d'un job de sauvegarde VM, restauration complète — limites documentées</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">Proxmox VE</span>
-            <span class="tech-tag">Windows Server 2022</span>
-            <span class="tech-tag">Active Directory</span>
-            <span class="tech-tag">DNS / DHCP</span>
-            <span class="tech-tag">Veeam B&R 13</span>
-            <span class="tech-tag">Apache2</span>
-            <span class="tech-tag">PCA / PRA</span>
-          </div>
-
-          <a class="doc-link" href="Mise_en_place_d_un_plan_de_PCA-PRA.pdf">
-            📄 Ouvrir la procédure
-          </a>
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Docker : Volumes et Persistance</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Mise en place d'un stockage persistant pour un serveur web Apache.</p>
+                <br>
+                <p><strong>Procédures techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Création de volumes Docker et montage sur le document root.</li>
+                    <li>Vérification de la persistance après suppression du conteneur.</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Volumes</span>
+                    <span class="tech-tag">Persistance</span>
+                </div>
+                <a href="Docker Volumes et persistance.pdf" target="_blank" class="btn-doc">
+                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
+            </div>
         </div>
-      </div>
 
-      <!-- ══════════════════════════════════════
-           PROJET 3 — pfSense AD Multi-sites
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Configuration pfSense pour Active Directory Multi-sites</h3>
-            <p>Interconnexion de sites distants avec authentification centralisée</p>
-          </div>
-          <span class="project-number">E5 — 03</span>
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Machine Virtuelle Jenkins avec VMware</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Préparation d'un environnement Linux pour l'intégration continue.</p>
+                <br>
+                <p><strong>Procédures techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Installation VM CentOS, configuration Docker et Docker Compose.</li>
+                    <li>Attribution des droits Docker à l'utilisateur Jenkins.</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">VMware</span>
+                    <span class="tech-tag">Jenkins</span>
+                    <span class="tech-tag">Docker Compose</span>
+                </div>
+                <a href="Machine Virtuelle Jenkins avec VmWare.pdf" target="_blank" class="btn-doc">
+                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure</a>
+            </div>
         </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Configuration d'un environnement pfSense pour interconnecter plusieurs sites distants et permettre l'authentification via un Active Directory centralisé. Mise en place du routage inter-sites et de la résolution DNS nécessaire au bon fonctionnement du domaine.</p>
 
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Configuration des interfaces WAN et LAN de pfSense pour chaque site</li>
-            <li>Paramétrage du routage statique inter-sites pour assurer la connectivité entre les réseaux</li>
-            <li>Configuration du DNS Resolver de pfSense pour la résolution du domaine Active Directory</li>
-            <li>Mise en place des règles pare-feu autorisant le trafic AD (LDAP, Kerberos, DNS, RPC)</li>
-            <li>Intégration des postes clients distants au domaine via pfSense comme passerelle</li>
-            <li>Vérification de l'authentification et des GPO appliquées sur les sites distants</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">pfSense</span>
-            <span class="tech-tag">Active Directory</span>
-            <span class="tech-tag">Multi-sites</span>
-            <span class="tech-tag">DNS</span>
-            <span class="tech-tag">Routage statique</span>
-            <span class="tech-tag">Kerberos / LDAP</span>
-            <span class="tech-tag">GPO</span>
-          </div>
-
-          <a class="doc-link" href="Configuration_pfSense_pour_AD_Multi-sites.pdf">
-            📄 Ouvrir la procédure
-          </a>
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Installation et Administration SQL Server</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Déploiement d'un SGBD et exploitation de données (Gares SNCF).</p>
+                <br>
+                <p><strong>Procédures techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Importation de fichiers CSV massifs.</li>
+                    <li>Réalisation de requêtes SQL complexes (LIKE, filtres multicritères).</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">SQL Server 2019</span>
+                    <span class="tech-tag">T-SQL</span>
+                </div>
+                <a href="KAPPLER_Thomas_SQL.pdf" target="_blank" class="btn-doc">
+                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure</a>
+            </div>
         </div>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 4 — Windows Server OS Admin
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Administration Windows Server OS</h3>
-            <p>Infrastructure réseau centralisée avec Active Directory et WDS</p>
-          </div>
-          <span class="project-number">E5 — 04</span>
-        </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Mise en place d'une infrastructure réseau centralisée sous Windows Server avec gestion des identités, des politiques de groupe et déploiement automatisé de postes clients.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Configuration d'IP statiques, routage, Active Directory, DNS et DHCP</li>
-            <li>Gestion des utilisateurs et déploiement de GPO (Utilisateurs et Ordinateurs)</li>
-            <li>Déploiement de Windows via le réseau avec WDS</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">Windows Server</span>
-            <span class="tech-tag">Active Directory</span>
-            <span class="tech-tag">WDS</span>
-            <span class="tech-tag">GPO</span>
-            <span class="tech-tag">DNS / DHCP</span>
-          </div>
-
-          <a class="doc-link" href="TP Windows Server OS admin.pdf">
-            📄 Ouvrir la procédure
-          </a>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 5 — Docker Debian 12
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Déploiement Docker — Debian 12 & Apache2</h3>
-            <p>Conteneurisation d'un service web et publication sur Docker Hub</p>
-          </div>
-          <span class="project-number">E5 — 05</span>
-        </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Création et déploiement d'une image Docker personnalisée pour un service web Apache sur Debian 12, puis publication sur Docker Hub.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Rédaction du Dockerfile, build de l'image et test du conteneur</li>
-            <li>Publication de l'image sur Docker Hub</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">Debian 12</span>
-            <span class="tech-tag">Apache2</span>
-            <span class="tech-tag">Docker Hub</span>
-          </div>
-
-          <a class="doc-link" href="Déploiement d'un service avec Docker  Debian12-Apache2.pdf">
-            📄 Ouvrir la procédure
-          </a>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 6 — Docker Volumes
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Docker — Volumes & Persistance des données</h3>
-            <p>Stockage persistant pour un serveur web Apache</p>
-          </div>
-          <span class="project-number">E5 — 06</span>
-        </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Mise en place d'un stockage persistant pour un serveur web Apache via les volumes Docker, afin de garantir la conservation des données après suppression du conteneur.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Création de volumes Docker et montage sur le document root Apache</li>
-            <li>Vérification de la persistance des données après suppression et recréation du conteneur</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">Volumes</span>
-            <span class="tech-tag">Persistance</span>
-            <span class="tech-tag">Apache2</span>
-          </div>
-
-          <a class="doc-link" href="Docker Volumes et persistance.pdf">
-            📄 Ouvrir la procédure
-          </a>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 7 — Jenkins VMware
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Machine Virtuelle Jenkins avec VMware</h3>
-            <p>Environnement Linux pour l'intégration continue</p>
-          </div>
-          <span class="project-number">E5 — 07</span>
-        </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Préparation d'un environnement Linux sous VMware pour l'intégration continue avec Jenkins et Docker Compose.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Installation VM CentOS, configuration Docker et Docker Compose</li>
-            <li>Attribution des droits Docker à l'utilisateur Jenkins</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">VMware</span>
-            <span class="tech-tag">Jenkins</span>
-            <span class="tech-tag">Docker Compose</span>
-            <span class="tech-tag">CentOS</span>
-          </div>
-
-          <a class="doc-link" href="Machine Virtuelle Jenkins avec VmWare.pdf">
-            📄 Ouvrir la procédure
-          </a>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════
-           PROJET 8 — SQL Server
-      ══════════════════════════════════════ -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div>
-            <h3>Installation & Administration SQL Server</h3>
-            <p>Déploiement d'un SGBD et exploitation de données réelles (Gares SNCF)</p>
-          </div>
-          <span class="project-number">E5 — 08</span>
-        </div>
-        <div class="project-content">
-          <p><strong>Contexte :</strong> Déploiement d'un SGBD SQL Server 2019 et exploitation de données réelles issues des gares SNCF — importation de fichiers CSV volumineux et requêtes complexes.</p>
-
-          <p><strong>Procédures techniques :</strong></p>
-          <ul>
-            <li>Importation de fichiers CSV massifs dans SQL Server</li>
-            <li>Réalisation de requêtes SQL complexes : LIKE, filtres multicritères, jointures</li>
-          </ul>
-
-          <div class="tech-stack">
-            <span class="tech-tag">SQL Server 2019</span>
-            <span class="tech-tag">T-SQL</span>
-            <span class="tech-tag">SGBD</span>
-          </div>
-
-          <a class="doc-link" href="KAPPLER_Thomas_SQL.pdf">
-            📄 Ouvrir la procédure
-          </a>
-        </div>
-      </div>
-
     </div>
-  </div>
 
-  <footer style="border-top:1px solid var(--border); padding:2rem; text-align:center; font-size:0.8rem; color:var(--text-light); margin-top:2rem;">
-    © 2026 Thomas Kappler — BTS SIO SISR — Alternant EDF
-  </footer>
-
-  <script>
-    const toggle = document.getElementById('navToggle');
-    const menu   = document.getElementById('navMenu');
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('active');
-      menu.classList.toggle('active');
-    });
-    window.addEventListener('scroll', () => {
-      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
-    });
-  </script>
-
+    <script src="scripts.js"></script>
 </body>
 </html>
