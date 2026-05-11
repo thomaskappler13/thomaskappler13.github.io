@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,6 +18,7 @@
             font-size: 0.9rem;
             transition: background 0.3s;
         }
+
         .btn-download:hover {
             background-color: #0056b3;
         }
@@ -40,14 +42,112 @@
             </ul>
         </div>
     </nav>
-	<br>
-	<br>
+
+    <br>
+    <br>
+
     <div class="container">
         <div class="section-header">
             <h2>Projets E5</h2>
             <p>Support et mise à disposition de services informatiques</p>
         </div>
-        
+
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Infrastructure sécurisée multi-sites avec pfSense</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Mise en place d'une infrastructure réseau multi-sites simulant une entreprise disposant de deux agences (Paris et Lyon).</p>
+                <br>
+
+                <p><strong>Objectifs :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Segmenter le réseau avec des VLAN.</li>
+                    <li>Sécuriser les échanges entre les différents sites.</li>
+                    <li>Déployer un Active Directory multi-sites.</li>
+                    <li>Centraliser l'authentification via LDAP.</li>
+                </ul>
+
+                <br>
+
+                <p><strong>Réalisations techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Configuration des VLAN Paris et Lyon sur pfSense.</li>
+                    <li>Mise en place des règles de pare-feu inter-sites.</li>
+                    <li>Déploiement de deux contrôleurs de domaine Active Directory.</li>
+                    <li>Configuration de Active Directory Sites & Services.</li>
+                    <li>Installation et configuration de GLPI avec authentification LDAP.</li>
+                    <li>Virtualisation complète de l'infrastructure sous Proxmox.</li>
+                </ul>
+
+                <br>
+
+                <p><strong>Compétences mobilisées :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Administration système et réseau.</li>
+                    <li>Sécurisation des infrastructures.</li>
+                    <li>Virtualisation et segmentation réseau.</li>
+                    <li>Gestion des utilisateurs et annuaire LDAP.</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">Proxmox</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">GLPI</span>
+                    <span class="tech-tag">LDAP</span>
+                    <span class="tech-tag">VLAN</span>
+                </div>
+
+                <a href="Configuration pfSense pour AD Multi-sites.pdf" target="_blank" class="btn-doc">
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <h3>Architecture réseau NAT - DMZ - VLAN avec pfSense</h3>
+            </div>
+            <div class="project-content">
+                <p><strong>Contexte :</strong> Création d'une infrastructure réseau sécurisée avec segmentation des flux et exposition contrôlée d'un serveur web.</p>
+                <br>
+
+                <p><strong>Objectifs :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Mettre en place une DMZ sécurisée.</li>
+                    <li>Segmenter les différents réseaux avec des VLAN.</li>
+                    <li>Configurer des règles NAT et firewall.</li>
+                    <li>Publier un serveur web vers l'extérieur.</li>
+                </ul>
+
+                <br>
+
+                <p><strong>Réalisations techniques :</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li>Création des réseaux LAN, DMZ et SERVEURS.</li>
+                    <li>Configuration DHCP et adressage IP sur pfSense.</li>
+                    <li>Mise en place de règles de filtrage réseau.</li>
+                    <li>Création d'un serveur web Apache dans la DMZ.</li>
+                    <li>Configuration du NAT et redirection de ports.</li>
+                    <li>Tests de connectivité et sécurisation des flux.</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">NAT</span>
+                    <span class="tech-tag">DMZ</span>
+                    <span class="tech-tag">VLAN</span>
+                    <span class="tech-tag">Apache2</span>
+                    <span class="tech-tag">Ubuntu Server</span>
+                </div>
+
+                <a href="Installation pfSense - NAT-DMZ-VLAN.pdf" target="_blank" class="btn-doc">
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
+            </div>
+        </div>
+
         <div class="project-card">
             <div class="project-header">
                 <h3>Administration Windows Server OS</h3>
@@ -58,7 +158,7 @@
                 <p><strong>Procédures techniques :</strong></p>
                 <ul style="margin-left: 2rem;">
                     <li>Configuration d'IP statiques, routage, Active Directory, DNS et DHCP.</li>
-                    <li>Gestion des utilisateurs et déploiement de GPO (Utilisateurs et Ordinateurs).</li>
+                    <li>Gestion des utilisateurs et déploiement de GPO.</li>
                     <li>Déploiement de Windows via le réseau avec WDS.</li>
                 </ul>
                 <div class="tech-stack">
@@ -67,7 +167,7 @@
                     <span class="tech-tag">WDS</span>
                 </div>
                 <a href="TP Windows Server OS admin.pdf" target="_blank" class="btn-doc">
-                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
                 </a>
             </div>
         </div>
@@ -81,7 +181,7 @@
                 <br>
                 <p><strong>Procédures techniques :</strong></p>
                 <ul style="margin-left: 2rem;">
-                    <li>Rédaction du Dockerfile, Build de l'image et test du conteneur.</li>
+                    <li>Rédaction du Dockerfile, build de l'image et test du conteneur.</li>
                     <li>Publication de l'image sur Docker Hub.</li>
                 </ul>
                 <div class="tech-stack">
@@ -89,8 +189,8 @@
                     <span class="tech-tag">Debian 12</span>
                     <span class="tech-tag">Docker Hub</span>
                 </div>
-                <a href="Déploiement d'un service avec Docker  Debian12-Apache2.pdf" target="_blank" class="btn-doc">
-                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                <a href="Déploiement d'un service avec Docker Debian12-Apache2.pdf" target="_blank" class="btn-doc">
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
                 </a>
             </div>
         </div>
@@ -113,7 +213,7 @@
                     <span class="tech-tag">Persistance</span>
                 </div>
                 <a href="Docker Volumes et persistance.pdf" target="_blank" class="btn-doc">
-                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
                 </a>
             </div>
         </div>
@@ -136,7 +236,8 @@
                     <span class="tech-tag">Docker Compose</span>
                 </div>
                 <a href="Machine Virtuelle Jenkins avec VmWare.pdf" target="_blank" class="btn-doc">
-                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure</a>
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
             </div>
         </div>
 
@@ -145,19 +246,20 @@
                 <h3>Installation et Administration SQL Server</h3>
             </div>
             <div class="project-content">
-                <p><strong>Contexte :</strong> Déploiement d'un SGBD et exploitation de données (Gares SNCF).</p>
+                <p><strong>Contexte :</strong> Déploiement d'un SGBD et exploitation de données SNCF.</p>
                 <br>
                 <p><strong>Procédures techniques :</strong></p>
                 <ul style="margin-left: 2rem;">
-                    <li>Importation de fichiers CSV massifs.</li>
-                    <li>Réalisation de requêtes SQL complexes (LIKE, filtres multicritères).</li>
+                    <li>Importation de fichiers CSV volumineux.</li>
+                    <li>Réalisation de requêtes SQL complexes et filtres multicritères.</li>
                 </ul>
                 <div class="tech-stack">
                     <span class="tech-tag">SQL Server 2019</span>
                     <span class="tech-tag">T-SQL</span>
                 </div>
                 <a href="KAPPLER_Thomas_SQL.pdf" target="_blank" class="btn-doc">
-                        <i class="fas fa-file-pdf"></i> Ouvrir la Procédure</a>
+                    <i class="fas fa-file-pdf"></i> Ouvrir la Procédure
+                </a>
             </div>
         </div>
     </div>
@@ -165,3 +267,4 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+```
