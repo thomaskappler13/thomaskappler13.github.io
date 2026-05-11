@@ -5,11 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À propos - Thomas Kappler</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome pour les icônes (optionnel mais recommandé pour les logos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">Portfolio BTS SIO</div>
+            <div class="logo">Portfolio <span>BTS SIO</span></div>
+            
+            <!-- Bouton Menu Mobile (Ajouté) -->
+            <div class="nav-toggle" onclick="toggleMobileNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Accueil</a></li>
                 <li><a href="about.html" class="nav-link active">À propos</a></li>
@@ -19,51 +29,82 @@
             </ul>
         </div>
     </nav>
-	<br>
-	<br>
-    <div class="container">
+
+    <div class="container" style="margin-top: 40px;">
         <div class="section-header">
             <h2>À propos de moi</h2>
             <p>Étudiant en alternance passionné par les infrastructures et la cybersécurité</p>
         </div>
 
         <div class="about-content">
+            <!-- Colonne Gauche : Profil -->
             <div class="profile-card">
                 <div class="profile-img">TK</div>
                 <h3>Thomas Kappler</h3>
-                <p>Alternant en BTS SIO SISR</p>
-                <hr style="margin: 1rem 0; opacity: 0.2;">
-                <p style="font-size: 0.9rem;">📍 Cormeilles-en-Parisis</p>
-                <p style="font-size: 0.9rem;">📧 thomas.kappler@orange.fr</p>
+                <p class="profile-badge">Alternant BTS SIO SISR</p>
+                <hr style="margin: 1.5rem 0; opacity: 0.1;">
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">📍 Cormeilles-en-Parisis</p>
+                <p style="font-size: 0.9rem; margin-bottom: 20px;">📧 thomas.kappler@orange.fr</p>
+                
+                <a href="assets/CV_Thomas_Kappler.pdf" class="cta-button" style="width: 100%; justify-content: center;" target="_blank">
+                    <i class="fas fa-file-download"></i> Mon CV (PDF)
+                </a>
             </div>
 
+            <!-- Colonne Droite : Expérience -->
             <div class="card">
                 <h3>💼 Expérience Professionnelle</h3>
-                <div style="margin-top: 1rem;">
-                    <h4>Appui et Support aux utilisateurs (Alternance)</h4>
-                    <p><em>EDF Saint Denis | Sept 2024 - Août 2026</em></p>
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li>Gestion des tickets et suivi des demandes utilisateurs.</li>
-                        <li>Administration SharePoint (droits, bibliothèques).</li>
-                        <li>Support technique : diagnostic et résolution d'incidents.</li>
-                        <li>Rédaction de procédures et guides utilisateurs.</li>
+                <div style="margin-top: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <h4>Appui et Support aux utilisateurs (Alternance)</h4>
+                        <span class="tech-tag">EDF</span>
+                    </div>
+                    <p><em>Saint-Denis | Sept 2024 - Août 2026</em></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                        <li>Gestion des tickets et suivi des demandes utilisateurs (ITSM).</li>
+                        <li>Administration SharePoint (gestion des droits, structures de bibliothèques).</li>
+                        <li>Support technique de proximité : diagnostic et résolution d'incidents matériels/logiciels.</li>
+                        <li>Rédaction de procédures techniques et de guides d'accompagnement.</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <h3>🎓 Formation</h3>
-            <p><strong>BTS SIO Option SISR</strong> - ESTIAM Paris 20 (2024-2026)</p>
-            <p><strong>Bachelor en Cybersécurité</strong> - ESIEA Ivry Sur Seine</p>
-            <p><strong>Baccalauréat Général</strong> - Lycée Montesquieu (Mention Assez Bien)</p>
-        </div>
+        <!-- Autres sections -->
+        <div class="card-grid">
+            <div class="card">
+                <h3>🎓 Formation</h3>
+                <p><strong>BTS SIO Option SISR</strong><br>ESTIAM Paris 20 (2024-2026)</p>
+                <div class="divider" style="margin: 1rem 0;"></div>
+                <p><strong>Bachelor en Cybersécurité</strong><br>ESIEA Ivry-sur-Seine</p>
+                <div class="divider" style="margin: 1rem 0;"></div>
+                <p><strong>Baccalauréat Général</strong><br>Lycée Montesquieu (Mention Assez Bien)</p>
+            </div>
 
-        <div class="card">
-            <h3>🛠️ Compétences & Intérêts</h3>
-            <p><strong>Technique :</strong> Virtualisation Linux/Windows, C, Python, SQL, HTML/CSS.</p>
-            <p style="margin-top: 1rem;"><strong>Loisirs :</strong> Volley Ball, Padel, Formule 1, Moto GP.</p>
+            <div class="card">
+                <h3>🛠️ Compétences Techniques</h3>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">Windows Server</span>
+                    <span class="tech-tag">Linux (Debian/Ubuntu)</span>
+                    <span class="tech-tag">Virtualisation (VMware)</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">Réseaux (Cisco)</span>
+                    <span class="tech-tag">Cybersécurité</span>
+                </div>
+                <h3 style="margin-top: 2rem; font-size: 1rem;">🎯 Centres d'intérêt</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Volley-ball, Padel, Formule 1, Moto GP.</p>
+            </div>
         </div>
     </div>
+
+    <!-- Pied de page -->
+    <footer style="text-align: center; padding: 40px 0; background: var(--white); margin-top: 50px; border-top: 1px solid #eee;">
+        <p>© 2026 Thomas Kappler - Portfolio BTS SIO SISR</p>
+    </footer>
+
+    <!-- Script indispensable pour le menu mobile -->
+    <script src="scripts.js"></script>
 </body>
 </html>
