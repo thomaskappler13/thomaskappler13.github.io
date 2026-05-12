@@ -5,94 +5,397 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veille Technologique - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+
+        /* ── OUTILS DE VEILLE ── */
+        .veille-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.25rem 0 0;
+        }
+
+        .tool-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* ── CATÉGORIE ── */
+        .veille-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.25rem;
+        }
+
+        .category-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .category-pill {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+
+        .pill-red   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .pill-blue  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+        /* ── ARTICLE CARD ── */
+        .article-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,.06);
+            transition: box-shadow 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 4px;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .article-card.cyber::before  { background: #dc2626; }
+        .article-card.cloud::before  { background: #1d4ed8; }
+
+        .article-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,.10);
+            border-color: #c7d7fa;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.6rem;
+        }
+
+        .article-source {
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            color: #64748b;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        .article-date {
+            font-size: 0.72rem;
+            color: #94a3b8;
+        }
+
+        .article-card h4 {
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+            line-height: 1.35;
+        }
+
+        .article-summary {
+            font-size: 0.86rem;
+            color: #475569;
+            line-height: 1.65;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ── BLOC ANALYSE ── */
+        .article-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .analysis-block {
+            border-radius: 7px;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.81rem;
+            line-height: 1.5;
+        }
+
+        .analysis-block.pertinence {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .analysis-block.retenu {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e3a8a;
+        }
+
+        .analysis-block strong {
+            display: block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 3px;
+            opacity: 0.75;
+        }
+
+        /* ── LIEN ARTICLE ── */
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #1d4ed8;
+            text-decoration: none;
+            margin-top: 0.75rem;
+            padding: 4px 10px;
+            border: 1px solid #bfdbfe;
+            border-radius: 5px;
+            background: #eff6ff;
+            transition: background 0.15s;
+        }
+
+        .article-link:hover { background: #dbeafe; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .article-analysis { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-			<a href="index.html" class="logo">
-			    Portfolio <span>BTS SIO</span>
-			</a>
+            <div class="logo">Portfolio <span>BTS SIO</span></div>
             <div class="nav-toggle" onclick="toggleMobileNav()">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Accueil</a></li>
-                <li><a href="about.html" class="nav-link">À propos</a></li>
-                <li><a href="e5.html" class="nav-link">E5 - Projets</a></li>
-                <li><a href="e6.html" class="nav-link">E6 - Projets</a></li>
+                <li><a href="index.html"  class="nav-link">Accueil</a></li>
+                <li><a href="about.html"  class="nav-link">À propos</a></li>
+                <li><a href="e5.html"     class="nav-link">E5 - Projets</a></li>
+                <li><a href="e6.html"     class="nav-link">E6 - Projets</a></li>
                 <li><a href="veille.html" class="nav-link active">Veille</a></li>
             </ul>
         </div>
     </nav>
-	<br>
-	<br>
+
+    <br><br>
+
     <div class="container">
+
         <div class="section-header">
             <h2>Veille Technologique et Juridique</h2>
-            <p>Ma méthode pour rester à jour dans le domaine informatique</p>
+            <p>Suivi régulier des actualités en cybersécurité et cloud pour rester à jour dans mon métier SISR</p>
         </div>
-        
+
+        <!-- ── MÉTHODE ── -->
         <div class="veille-method">
-            <h3>Ma méthode de veille</h3>
+            <h3>🔍 Ma méthode de veille</h3>
             <div class="method-step">
                 <div class="step-number">1</div>
                 <div>
-                    <h4>Identification des sources</h4>
-                    <p>Sélection de sources fiables : sites spécialisés, blogs techniques, forums communautaires</p>
+                    <h4>Sources sélectionnées</h4>
+                    <p>Je consulte régulièrement des sources fiables et spécialisées : bulletins officiels de l'ANSSI et du CERT-FR, sites techniques IT-Connect et LeMagIT, flux RSS configurés sur mes thèmes (cybersécurité, cloud, virtualisation).</p>
                 </div>
             </div>
             <div class="method-step">
                 <div class="step-number">2</div>
                 <div>
-                    <h4>Collecte automatisée</h4>
-                    <p>Utilisation de flux RSS, alertes Google, newsletters pour automatiser la collecte d'informations</p>
+                    <h4>Collecte et tri</h4>
+                    <p>Alertes Google configurées sur des mots-clés précis (ransomware France, CVE critique Windows, SecNumCloud…). Je lis les titres quotidiennement et sélectionne les articles pertinents pour mon activité SISR.</p>
                 </div>
             </div>
             <div class="method-step">
                 <div class="step-number">3</div>
                 <div>
-                    <h4>Analyse et tri</h4>
-                    <p>Évaluation de la pertinence et de la fiabilité des informations collectées</p>
+                    <h4>Analyse et application</h4>
+                    <p>Pour chaque article retenu, j'évalue l'impact sur mon métier : est-ce une menace à surveiller en entreprise ? Un outil à tester ? Une réglementation qui change les pratiques ?</p>
                 </div>
             </div>
             <div class="method-step">
                 <div class="step-number">4</div>
                 <div>
-                    <h4>Synthèse et partage</h4>
-                    <p>Création de synthèses et partage des informations pertinentes avec l'équipe</p>
+                    <h4>Outils utilisés</h4>
+                    <p>Flux RSS, alertes Google, newsletters ANSSI/CERT-FR, veille Twitter/X sur comptes spécialisés.</p>
                 </div>
+            </div>
+
+            <div class="veille-tools">
+                <span class="tool-tag">📡 ANSSI</span>
+                <span class="tool-tag">🔔 CERT-FR</span>
+                <span class="tool-tag">📰 IT-Connect</span>
+                <span class="tool-tag">📰 LeMagIT</span>
+                <span class="tool-tag">🔍 Alertes Google</span>
+                <span class="tool-tag">📥 Flux RSS</span>
+                <span class="tool-tag">🗞️ ZATAZ</span>
+                <span class="tool-tag">🗞️ Le Monde Informatique</span>
             </div>
         </div>
 
-        <div class="card-grid">
-            <div class="card">
-                <h3>🔒 Veille Cybersécurité</h3>
-                <p>Suivi des dernières vulnérabilités, techniques d'attaque et solutions de protection dans le domaine de la cybersécurité.</p>
-                <br>
-                <strong>Sources principales :</strong>
-                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <li>ANSSI</li>
-                    <li>CERT-FR</li>
-                    <li>CVE Database</li>
-                    <li>Security Forums</li>
-                </ul>
+        <!-- ════════════════════════════════
+             CYBERSÉCURITÉ
+        ════════════════════════════════ -->
+        <div class="veille-category">
+            <div class="category-header">
+                <h3>🔒 Cybersécurité</h3>
+                <span class="category-pill pill-red">Thème 1</span>
             </div>
-            <div class="card">
-                <h3>⚖️ Veille Juridique</h3>
-                <p>Surveillance des évolutions réglementaires impactant l'informatique : RGPD, cybersécurité, données personnelles.</p>
-                <br>
-                <strong>Domaines suivis :</strong>
-                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <li>Protection des données</li>
-                    <li>Droit informatique</li>
-                    <li>Réglementations sectorielles</li>
-                    <li>Propriété intellectuelle</li>
-                </ul>
+
+            <!-- ARTICLE 1 -->
+            <div class="article-card cyber">
+                <div class="article-meta">
+                    <span class="article-source">ZATAZ / LeMagIT</span>
+                    <span class="article-date">Janvier 2026</span>
+                </div>
+                <h4>Ransomware en France : 2025, l'année de la reprise — concentration des groupes et professionnalisation des attaques</h4>
+                <p class="article-summary">
+                    Après une relative accalmie en 2024 liée aux Jeux Olympiques, les attaques par ransomware ont fortement repris en France en 2025. Les groupes les plus actifs contre les entreprises françaises sont Akira, RansomHub, Qilin, DragonForce et Medusa, qui concentrent plus de la moitié des attaques. En novembre 2025, le groupe Clop a revendiqué à lui seul 334 attaques en un mois. Selon le rapport Sophos, le montant médian des rançons payées en France atteint 1,22 million de dollars, et 58 % des attaques aboutissent au chiffrement des données. La cause première reste l'exploitation de vulnérabilités (30 % des incidents).
+                </p>
+                <div class="article-analysis">
+                    <div class="analysis-block pertinence">
+                        <strong>🎯 Pertinence pour mon métier</strong>
+                        En tant qu'alternant SISR chez EDF — opérateur d'importance vitale (OIV) — ce type d'attaque est une menace directe. La mise en place de PCA/PRA, la gestion des sauvegardes et les politiques de patch management sont des réponses concrètes à ces risques.
+                    </div>
+                    <div class="analysis-block retenu">
+                        <strong>💡 Ce que j'en retiens</strong>
+                        La chaîne d'attaque "infostealer → accès initial → ransomware" s'industrialise. Il faut généraliser la MFA résistante au phishing (FIDO2/passkeys) et réduire les sessions longues. Le PCA/PRA que j'ai mis en place en TP répond directement à ce type de menace.
+                    </div>
+                </div>
+                <a href="https://www.zataz.com/ransomware-2025-2026-la-concentration-saccelere/" target="_blank" class="article-link">🔗 Lire l'article (ZATAZ)</a>
             </div>
+
+            <!-- ARTICLE 2 -->
+            <div class="article-card cyber">
+                <div class="article-meta">
+                    <span class="article-source">IT-Connect</span>
+                    <span class="article-date">Mai 2026</span>
+                </div>
+                <h4>Dirty Frag — faille zero-day Linux permettant d'obtenir les droits root sans correctif disponible</h4>
+                <p class="article-summary">
+                    Le 7 mai 2026, le chercheur Hyunwoo Kim a divulgué publiquement la vulnérabilité "Dirty Frag" affectant le noyau Linux. La faille exploite deux vulnérabilités dans les composants xfrm-ESP et RxRPC liées à des opérations cryptographiques, permettant à un utilisateur sans privilèges d'écraser des fichiers critiques en RAM (comme /etc/passwd). Un code d'exploitation universel fonctionnel sur de nombreuses distributions Linux a été publié. Au moment de la divulgation, aucun patch officiel ni CVE n'existait encore — l'embargo ayant été rompu prématurément.
+                </p>
+                <div class="article-analysis">
+                    <div class="analysis-block pertinence">
+                        <strong>🎯 Pertinence pour mon métier</strong>
+                        Mes serveurs Linux (SRV-WEB Ubuntu, WEB-DMZ) en TP et les serveurs Linux en entreprise sont directement concernés. Ce type de vulnérabilité noyau nécessite une surveillance active des bulletins CERT-FR et une capacité à patcher rapidement.
+                    </div>
+                    <div class="analysis-block retenu">
+                        <strong>💡 Ce que j'en retiens</strong>
+                        L'importance de surveiller le CERT-FR quotidiennement pour les CVE critiques sans patch. En attendant un correctif, des mesures compensatoires existent (restrictions d'accès local, durcissement). Cette faille rappelle Dirty Pipe (2022) que j'ai étudié en cours.
+                    </div>
+                </div>
+                <a href="https://www.it-connect.fr/dirty-frag-cette-faille-zero-day-donne-les-droits-root-sur-linux/" target="_blank" class="article-link">🔗 Lire l'article (IT-Connect)</a>
+            </div>
+
+            <!-- ARTICLE 3 -->
+            <div class="article-card cyber">
+                <div class="article-meta">
+                    <span class="article-source">Le Monde Informatique / Malwarebytes</span>
+                    <span class="article-date">Avril 2026</span>
+                </div>
+                <h4>Patch Tuesday avril 2026 — 165 failles corrigées dont des zero-days critiques sur Active Directory, SharePoint et Windows TCP/IP</h4>
+                <p class="article-summary">
+                    Microsoft a publié en avril 2026 des correctifs pour 165 vulnérabilités. Parmi les plus critiques : CVE-2026-33826 (CVSS 8, RCE dans Active Directory via validation RPC incorrecte), CVE-2026-33827 (CVSS 8.1, RCE dans Windows TCP/IP via IPv6), CVE-2026-33824 (CVSS 9.8, RCE dans le service IKE sans privilèges requis) et CVE-2026-32201 (spoofing SharePoint activement exploitée). Des failles dans Office permettent également l'exécution de code via le volet de prévisualisation.
+                </p>
+                <div class="article-analysis">
+                    <div class="analysis-block pertinence">
+                        <strong>🎯 Pertinence pour mon métier</strong>
+                        Active Directory et SharePoint sont au cœur de mon alternance chez EDF. Une faille RCE dans AD avec faible complexité d'exploitation est une menace critique pour tout le SI. La CVE SharePoint concerne directement mon travail d'administration Microsoft 365.
+                    </div>
+                    <div class="analysis-block retenu">
+                        <strong>💡 Ce que j'en retiens</strong>
+                        Le suivi mensuel du Patch Tuesday est indispensable pour un administrateur systèmes. Je dois prioriser les correctifs AD et SharePoint dès leur publication, et vérifier que nos serveurs WSUS sont à jour. La gestion des mises à jour fait partie de mon rôle chez EDF.
+                    </div>
+                </div>
+                <a href="https://www.lemondeinformatique.fr/actualites/lire-microsoft-corrige-165-failles-en-avril-dont-une-zero-day-99927.html" target="_blank" class="article-link">🔗 Lire l'article (Le Monde Informatique)</a>
+            </div>
+
         </div>
+
+        <!-- ════════════════════════════════
+             CLOUD & SOUVERAINETÉ
+        ════════════════════════════════ -->
+        <div class="veille-category">
+            <div class="category-header">
+                <h3>☁️ Cloud & Souveraineté numérique</h3>
+                <span class="category-pill pill-blue">Thème 2</span>
+            </div>
+
+            <!-- ARTICLE 4 -->
+            <div class="article-card cloud">
+                <div class="article-meta">
+                    <span class="article-source">ANSSI / Usine Digitale</span>
+                    <span class="article-date">Janvier 2026</span>
+                </div>
+                <h4>S3NS obtient la qualification SecNumCloud — premier cloud hybride franco-américain certifié par l'ANSSI</h4>
+                <p class="article-summary">
+                    Fin 2025, S3NS — coentreprise détenue à 95 % par Thales et 5 % par Google — a obtenu la qualification SecNumCloud de l'ANSSI, devenant le premier cloud "hybride" alliant technologie américaine et certification française. Cette qualification couvre plus de 1 200 exigences. Elle a relancé le débat sur la souveraineté numérique : le CLOUD Act américain permet en théorie aux autorités US d'accéder aux données d'entreprises américaines, même hébergées en Europe. Le directeur de l'ANSSI a clarifié que SecNumCloud est un "outil de cybersécurité" et non un "label de souveraineté politique".
+                </p>
+                <div class="article-analysis">
+                    <div class="analysis-block pertinence">
+                        <strong>🎯 Pertinence pour mon métier</strong>
+                        EDF est un OIV soumis aux exigences les plus strictes d'hébergement de données sensibles. La question du cloud souverain est stratégique : choisir entre hyperscalers américains (Azure, AWS) et solutions SecNumCloud françaises (OVHcloud, Outscale) est une décision d'infrastructure directement liée à mon travail.
+                    </div>
+                    <div class="analysis-block retenu">
+                        <strong>💡 Ce que j'en retiens</strong>
+                        SecNumCloud n'est pas qu'un label marketing : c'est une obligation pour les OIV et administrations traitant des données sensibles. La qualification de S3NS élargit les options tout en soulevant des questions légitimes sur l'indépendance réelle vis-à-vis du droit américain.
+                    </div>
+                </div>
+                <a href="https://www.usine-digitale.fr/informatique/cloud/souverainete-ce-que-lobtention-du-visa-secnumcloud-par-s3ns-change-durablement-dans-la-doctrine-francaise-du-cloud-de-confiance.IMMAGOMCTBFM3DXWKV2KBAZLSU.html" target="_blank" class="article-link">🔗 Lire l'article (Usine Digitale)</a>
+            </div>
+
+            <!-- ARTICLE 5 -->
+            <div class="article-card cloud">
+                <div class="article-meta">
+                    <span class="article-source">numerique.gouv.fr (DINUM)</span>
+                    <span class="article-date">Mars 2026</span>
+                </div>
+                <h4>Doctrine "Cloud au Centre" — bilan 2025 : 84 M€ de commandes dont 70 % vers des fournisseurs européens</h4>
+                <p class="article-summary">
+                    Lors de la journée "L'État dans le nuage" du 24 mars 2026, la DINUM a présenté le bilan 2025 de la doctrine "Cloud au Centre" (adoptée en 2021). Résultats : 84 millions d'euros de commandes sur le marché cloud interministériel, en hausse de 62 % par rapport à 2024, dont 70 % vers des fournisseurs européens. Les offres SecNumCloud représentent 50 % des commandes de l'État. La prochaine étape vise la migration des grands systèmes d'information historiques vers le cloud de confiance, et le déploiement souverain de l'IA (Mistral AI sur infrastructure Outscale SecNumCloud).
+                </p>
+                <div class="article-analysis">
+                    <div class="analysis-block pertinence">
+                        <strong>🎯 Pertinence pour mon métier</strong>
+                        EDF, en tant qu'entreprise publique stratégique, est directement concernée par ces orientations. La migration vers le cloud de confiance impacte l'architecture des SI et les compétences des équipes infrastructure — dont je fais partie en alternance.
+                    </div>
+                    <div class="analysis-block retenu">
+                        <strong>💡 Ce que j'en retiens</strong>
+                        Le cloud n'est plus optionnel dans le secteur public et para-public. Maîtriser Azure, AWS mais aussi les offres souveraines (OVHcloud, Outscale) devient indispensable. Cette tendance renforce l'intérêt de ma veille cloud et justifie mes projets de conteneurisation (Docker, Jenkins).
+                    </div>
+                </div>
+                <a href="https://www.numerique.gouv.fr/sinformer/espace-presse/etat-transition-cloud-offres-europeennes-souveraines/" target="_blank" class="article-link">🔗 Lire l'article (numerique.gouv.fr)</a>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="scripts.js"></script>
